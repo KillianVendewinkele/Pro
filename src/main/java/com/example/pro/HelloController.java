@@ -285,6 +285,69 @@ public class HelloController implements Initializable {
         return  imc_message;
     }
 
+    public static int romanConvert(String rom) {
+        int decimal = 0;
+        String romanNumeral = rom.toUpperCase();
+        for(int x = 0;x<romanNumeral.length();x++) {
+            char convertToDecimal = rom.charAt(x);
+
+            switch (convertToDecimal) {
+                case 'M':
+                    decimal += 1000;
+                    break;
+
+                case 'D':
+                    decimal += 500;
+                    break;
+
+                case 'C':
+                    decimal += 100;
+                    break;
+
+                case 'L':
+                    decimal += 50;
+                    break;
+
+                case 'X':
+                    decimal += 10;
+                    break;
+
+                case 'V':
+                    decimal += 5;
+                    break;
+
+                case 'I':
+                    decimal += 1;
+                    break;
+            }
+        }
+        if (romanNumeral.contains("IV"))
+        {
+            decimal-=2;
+        }
+        if (romanNumeral.contains("IX"))
+        {
+            decimal-=2;
+        }
+        if (romanNumeral.contains("XL"))
+        {
+            decimal-=10;
+        }
+        if (romanNumeral.contains("XC"))
+        {
+            decimal-=10;
+        }
+        if (romanNumeral.contains("CD"))
+        {
+            decimal-=100;
+        }
+        if (romanNumeral.contains("CM"))
+        {
+            decimal-=100;
+        }
+        return decimal;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
@@ -329,6 +392,16 @@ public class HelloController implements Initializable {
             }
             catch (Exception ERROR){
                 System.out.println("ERROR - Your binary is trash");
+            }
+        });
+
+        roman.setOnKeyReleased(actionrom ->{
+            try{
+                String num = roman.getText();
+                deci.setText(String.valueOf(romanConvert(num)));
+            }
+            catch (Exception ERROR){
+                System.out.println("ERROR");
             }
         });
         IMCsend.setOnAction(action -> {
