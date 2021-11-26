@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import static java.lang.Integer.parseInt;
+
 public class HelloController implements Initializable {
 
     @FXML
@@ -147,17 +149,43 @@ public class HelloController implements Initializable {
         }
         else {
             if (our_int_in_str.length() >= 1) {
-                our_number_in_Romain_str = T_unit.get(Integer.parseInt(our_int_in_str_reversed.substring(0, 1))) + our_number_in_Romain_str;
+                our_number_in_Romain_str = T_unit.get(parseInt(our_int_in_str_reversed.substring(0, 1))) + our_number_in_Romain_str;
                 if (our_int_in_str.length() >= 2) {
-                    our_number_in_Romain_str = T_diz.get(Integer.parseInt(our_int_in_str_reversed.substring(1, 2))) + our_number_in_Romain_str;
+                    our_number_in_Romain_str = T_diz.get(parseInt(our_int_in_str_reversed.substring(1, 2))) + our_number_in_Romain_str;
                     if (our_int_in_str.length() >= 3) {
-                        our_number_in_Romain_str = T_cent.get(Integer.parseInt(our_int_in_str_reversed.substring(2, 3))) + our_number_in_Romain_str;
+                        our_number_in_Romain_str = T_cent.get(parseInt(our_int_in_str_reversed.substring(2, 3))) + our_number_in_Romain_str;
                     }
 
                 }
             }
         }
         return our_number_in_Romain_str;
+    }
+
+    public static String ReversedbinaryNum(int n){
+        String our_number_in_str = String.valueOf(n);
+        boolean is_a_binary = true;
+        for (int verif = 0; verif<our_number_in_str.length(); verif++){
+            int i = Integer.parseInt(our_number_in_str.substring(verif, (verif + 1)));
+            if (i != 1){
+                if (i != 0) {
+                    System.out.println(n + " is is not a binary");
+                    System.out.println("because of the number :" + our_number_in_str.substring(verif, (verif + 1)) );
+                    is_a_binary = false;
+                    break;
+                }
+            }
+        }
+        int temp_int = 0;
+        for (int length = 0; length < our_number_in_str.length(); length++){
+            temp_int += (int) (Integer.parseInt(our_number_in_str.substring(length,length+1))*Math.pow(2, (our_number_in_str.length()-(length+1)) ));
+        }
+        if (is_a_binary){
+            return String.valueOf(temp_int);
+        }
+        else{
+            return "ERROR, this is not a binary";
+        }
     }
 
     @Override
@@ -179,7 +207,7 @@ public class HelloController implements Initializable {
 
         deci.setOnAction(action ->{
             try{
-                int num = Integer.parseInt(deci.getText());
+                int num = parseInt(deci.getText());
                 binary.setText(binaryNum(num));
                 hexa.setText(hexaNum(num));
                 roman.setText(RomainNumber(num));
@@ -193,6 +221,14 @@ public class HelloController implements Initializable {
             try{
                 String num = (hexa.getText());
                 deci.setText(String.valueOf(getDecimal(num)));
+            }
+            catch (Exception ERROR){
+                System.out.println("ERROR");
+            }
+        });
+        binary.setOnAction(action -> {
+            try{
+                deci.setText(ReversedbinaryNum(parseInt(binary.getText())));
             }
             catch (Exception ERROR){
                 System.out.println("ERROR");
