@@ -50,6 +50,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <VBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.pro.HelloController">
@@ -99,37 +102,101 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="541.0" prefWidth="222.0">
                      <children>
-                        <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" text="Home">
+                        <Button fx:id="btnHome" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: Darkblue; -fx-border-radius: 20; -fx-border-width: 3;" text="Home">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
                            <font>
                               <Font size="30.0" />
                            </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
                         </Button>
-                        <Button fx:id="btnAlgo" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" text="Algo">
+                        <Button fx:id="btnAlgo" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" style="-fx-border-color: darkblue; -fx-border-radius: 20; -fx-background-color: white; -fx-border-width: 3;" text="Algo">
                            <VBox.margin>
                               <Insets top="50.0" />
                            </VBox.margin>
                            <font>
                               <Font size="30.0" />
                            </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
                         </Button>
-                        <Button fx:id="btnimc" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" text="IMC">
+                        <Button fx:id="btnimc" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-border-color: darkblue; -fx-border-width: 3;" text="IMC">
                            <font>
                               <Font size="30.0" />
                            </font>
                            <VBox.margin>
                               <Insets top="50.0" />
                            </VBox.margin>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
                         </Button>
-                        <Button fx:id="btnexit" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" text="Exit">
+                        <Button fx:id="btnexit" mnemonicParsing="false" prefHeight="90.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: darkblue; -fx-border-radius: 20; -fx-border-width: 3;" text="Exit">
                            <font>
                               <Font size="30.0" />
                            </font>
                            <VBox.margin>
                               <Insets bottom="20.0" top="50.0" />
                            </VBox.margin>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="1.0" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
                         </Button>
                      </children>
                   </VBox>
@@ -137,7 +204,7 @@
         </AnchorPane>
         <ScrollPane prefHeight="-1.0" prefWidth="-1.0">
           <content>
-            <AnchorPane id="Content" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0">
+            <AnchorPane id="Content" fx:id="global_moncul" minHeight="-1.0" minWidth="-1.0" prefHeight="545.0" prefWidth="430.0" style="-fx-background-color: lightgray;">
                      <children>
                         <VBox fx:id="globalTableau" prefHeight="545.0" prefWidth="430.0">
                            <children>
@@ -178,9 +245,9 @@
                                        <children>
                                           <HBox alignment="CENTER" prefHeight="23.0" prefWidth="200.0">
                                              <children>
-                                                <Label text="RomanNbm">
+                                                <Label text="RomanNmb">
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="American Typewriter" size="18.0" />
                                                    </font>
                                                    <opaqueInsets>
                                                       <Insets />
@@ -188,22 +255,70 @@
                                                    <HBox.margin>
                                                       <Insets right="90.0" />
                                                    </HBox.margin>
+                                                   <textFill>
+                                                      <LinearGradient endX="1.0" endY="1.0">
+                                                         <stops>
+                                                            <Stop>
+                                                               <color>
+                                                                  <Color green="1.0" blue="0.4680851101875305" />
+                                                               </color>
+                                                            </Stop>
+                                                            <Stop offset="1.0">
+                                                               <color>
+                                                                  <Color />
+                                                               </color>
+                                                            </Stop>
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </textFill>
                                                 </Label>
-                                                <Label text="Decimal">
-                                                   <font>
-                                                      <Font size="18.0" />
-                                                   </font>
+                                                <Label prefHeight="22.0" prefWidth="92.0" text="Decimal">
                                                    <HBox.margin>
                                                       <Insets right="120.0" />
                                                    </HBox.margin>
-                                                </Label>
-                                                <Label text="Hexa">
+                                                   <textFill>
+                                                      <LinearGradient endX="1.0" endY="1.0">
+                                                         <stops>
+                                                            <Stop>
+                                                               <color>
+                                                                  <Color green="1.0" blue="0.4680851101875305" />
+                                                               </color>
+                                                            </Stop>
+                                                            <Stop offset="1.0">
+                                                               <color>
+                                                                  <Color />
+                                                               </color>
+                                                            </Stop>
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </textFill>
                                                    <font>
-                                                      <Font size="18.0" />
+                                                      <Font name="American Typewriter" size="18.0" />
                                                    </font>
+                                                </Label>
+                                                <Label prefHeight="22.0" prefWidth="56.0" text="Hexa">
                                                    <HBox.margin>
                                                       <Insets right="15.0" />
                                                    </HBox.margin>
+                                                   <textFill>
+                                                      <LinearGradient endX="1.0" endY="1.0">
+                                                         <stops>
+                                                            <Stop>
+                                                               <color>
+                                                                  <Color green="1.0" blue="0.4680851101875305" />
+                                                               </color>
+                                                            </Stop>
+                                                            <Stop offset="1.0">
+                                                               <color>
+                                                                  <Color />
+                                                               </color>
+                                                            </Stop>
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </textFill>
+                                                   <font>
+                                                      <Font name="American Typewriter" size="18.0" />
+                                                   </font>
                                                 </Label>
                                              </children>
                                              <VBox.margin>
@@ -212,7 +327,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" prefHeight="84.0" prefWidth="430.0">
                                              <children>
-                                                <TextField fx:id="roman" alignment="CENTER" prefHeight="38.0" prefWidth="93.0">
+                                                <TextField fx:id="roman" alignment="CENTER" prefHeight="38.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 3px;">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -221,8 +336,24 @@
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
+                                                   <textFill>
+                                                      <LinearGradient endX="1.0" endY="1.0">
+                                                         <stops>
+                                                            <Stop>
+                                                               <color>
+                                                                  <Color />
+                                                               </color>
+                                                            </Stop>
+                                                            <Stop offset="1.0">
+                                                               <color>
+                                                                  <Color red="1.0" />
+                                                               </color>
+                                                            </Stop>
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </textFill>
                                                 </Label>
-                                                <TextField fx:id="deci" alignment="CENTER" prefHeight="38.0" prefWidth="93.0">
+                                                <TextField fx:id="deci" alignment="CENTER" prefHeight="38.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 3px;">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -231,8 +362,24 @@
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
+                                                   <textFill>
+                                                      <LinearGradient endX="1.0" endY="1.0">
+                                                         <stops>
+                                                            <Stop>
+                                                               <color>
+                                                                  <Color />
+                                                               </color>
+                                                            </Stop>
+                                                            <Stop offset="1.0">
+                                                               <color>
+                                                                  <Color red="1.0" />
+                                                               </color>
+                                                            </Stop>
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </textFill>
                                                 </Label>
-                                                <TextField fx:id="hexa" alignment="CENTER" prefHeight="38.0" prefWidth="93.0">
+                                                <TextField fx:id="hexa" alignment="CENTER" prefHeight="38.0" prefWidth="93.0" style="-fx-border-color: black; -fx-border-width: 3px;">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -267,8 +414,24 @@
                                                    <font>
                                                       <Font size="18.0" />
                                                    </font>
+                                                   <textFill>
+                                                      <LinearGradient endX="1.0" endY="1.0" startX="1.0">
+                                                         <stops>
+                                                            <Stop>
+                                                               <color>
+                                                                  <Color green="0.8026315569877625" blue="0.10701754689216614" />
+                                                               </color>
+                                                            </Stop>
+                                                            <Stop offset="1.0">
+                                                               <color>
+                                                                  <Color />
+                                                               </color>
+                                                            </Stop>
+                                                         </stops>
+                                                      </LinearGradient>
+                                                   </textFill>
                                                 </Label>
-                                                <TextField fx:id="binary" alignment="CENTER" prefHeight="38.0" prefWidth="422.0">
+                                                <TextField fx:id="binary" alignment="CENTER" prefHeight="38.0" prefWidth="422.0" style="-fx-border-color: black; -fx-border-width: 3;">
                                                    <font>
                                                       <Font size="14.0" />
                                                    </font>
@@ -292,7 +455,7 @@
                                           <Font size="24.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="taille" layoutX="233.0" layoutY="145.0" prefHeight="26.0" prefWidth="76.0">
+                                    <TextField fx:id="height_id" layoutX="233.0" layoutY="145.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: black; -fx-border-width: 3px;">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -302,7 +465,7 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="poids" layoutX="233.0" layoutY="227.0" prefHeight="26.0" prefWidth="76.0">
+                                    <TextField fx:id="weight_id" layoutX="233.0" layoutY="227.0" prefHeight="26.0" prefWidth="76.0" style="-fx-border-color: black; -fx-border-width: 3px;">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -312,14 +475,35 @@
                                           <Font size="18.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="IMCsend" layoutX="150.0" layoutY="353.0" mnemonicParsing="false" text="Envoyer">
+                                    <Button fx:id="IMCsend" layoutX="150.0" layoutY="353.0" mnemonicParsing="false" style="-fx-background-color: lightgray; -fx-border-radius: 20; -fx-border-color: darkblue; -fx-border-width: 3;" text="Envoyer">
                                        <font>
                                           <Font size="30.0" />
                                        </font>
+                                       <textFill>
+                                          <RadialGradient centerX="0.4722991689750693" centerY="0.5320665083135392" focusAngle="-65.17" radius="0.708092485549133">
+                                             <stops>
+                                                <Stop>
+                                                   <color>
+                                                      <Color green="1.0" blue="0.3166666626930237" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="0.007532956685499058">
+                                                   <color>
+                                                      <Color green="1.0" blue="0.3166666626930237" />
+                                                   </color>
+                                                </Stop>
+                                                <Stop offset="1.0">
+                                                   <color>
+                                                      <Color red="0.0018274853937327862" green="0.10611598193645477" blue="0.19736842811107635" />
+                                                   </color>
+                                                </Stop>
+                                             </stops>
+                                          </RadialGradient>
+                                       </textFill>
                                     </Button>
-                                    <Label fx:id="resultimc" layoutX="80.0" layoutY="436.0" prefHeight="47.0" prefWidth="222.0">
+                                    <Label fx:id="resultimc" layoutX="45.0" layoutY="436.0" prefHeight="47.0" prefWidth="353.0">
                                        <font>
-                                          <Font size="36.0" />
+                                          <Font size="10.0" />
                                        </font>
                                     </Label>
                                  </children>
@@ -409,7 +593,7 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </TextArea>
-                        <Button mnemonicParsing="false" text="Button">
+                        <Button fx:id="btnValidate" mnemonicParsing="false" style="-fx-background-color: lightblue;" text="Validate">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>

@@ -20,6 +20,20 @@ import static java.lang.Integer.parseInt;
 
 public class HelloController implements Initializable {
 
+    @FXML private Button btnValidate;
+
+    @FXML private  TextField Title;
+
+    @FXML private  TextField Author;
+
+    @FXML private TextArea Resume;
+
+    @FXML private TextField Column;
+
+    @FXML private TextField Row;
+
+    @FXML private TextField Publication;
+
     @FXML
     private TableColumn<Book, String> author;
 
@@ -60,6 +74,9 @@ public class HelloController implements Initializable {
     private Button IMCsend;
 
     @FXML
+    private AnchorPane global_moncul;
+
+    @FXML
     private VBox globalStats;
 
     @FXML
@@ -93,10 +110,10 @@ public class HelloController implements Initializable {
     private TextField hexa;
 
     @FXML
-    private TextField weight;
+    private TextField weight_id;
 
     @FXML
-    private TextField height;
+    private TextField height_id;
 
     @FXML
     private TextField deci;
@@ -217,40 +234,37 @@ public class HelloController implements Initializable {
                 more than 40    You are morbidly or massively obese              */
 
     public static String IMCtest(int weight, int height){
-        System.out.println("start");
         String imc_message = "";
         boolean verification_weight = true;
         boolean verification_height = true;
-        float imc = (float) (weight / Math.pow(height, height));
-        System.out.println("init done");
+        float tempo_height_pow = (height*height);
+        float imc = (weight / tempo_height_pow)*10000;
+
         if (weight < 0){
             verification_weight = false;
         }
         if (height < 0){
             verification_height = false;
         }
-        System.out.println("verif init done");
-
         if (verification_height){
             if (verification_weight){
-                System.out.println("starting and searching your imc");
-                if (imc < 18.5) {
+                if (imc <= 18.5) {
                     imc_message = "Your imc is : " + String.valueOf(imc) + ". You are underweight ";
                 }
                 else{
-                    if (imc < 25){
+                    if (imc <= 25){
                         imc_message = "Your imc is : " + String.valueOf(imc) + ". You have a normal weight";
                     }
                     else{
-                        if (imc < 30){
+                        if (imc <= 30){
                             imc_message = "Your imc is : " + String.valueOf(imc) + ". You are overweight";
                         }
                         else{
-                            if (imc < 35){
+                            if (imc <= 35){
                                 imc_message = "Your imc is : " + String.valueOf(imc) + ". You are moderately obese";
                             }
                             else{
-                                if (imc < 40){
+                                if (imc <= 40){
                                     imc_message = "Your imc is : " + String.valueOf(imc) + ". You are obese";
                                 }
                                 else {
@@ -263,14 +277,11 @@ public class HelloController implements Initializable {
             }
             else{
                 imc_message = "ERROR, wrong weight";
-                System.out.println("wrong height");
             }
         }
         else{
             imc_message = "ERROR, wrong height";
-            System.out.println("wrong weight");
         }
-        System.out.println("all has been done");
         return  imc_message;
     }
 
@@ -321,36 +332,52 @@ public class HelloController implements Initializable {
             }
         });
         IMCsend.setOnAction(action -> {
-            try{
-                int tempo_height = parseInt(height.getText());
-                int tempo_weight = parseInt(weight.getText());
-
-                resultimc.setText(IMCtest(tempo_weight, tempo_height));
-            }
-            catch(Exception ERROR) {
-                System.out.println("ERROR - Are you too much big?");
-            }
+            System.out.println(parseInt(weight_id.getText()));
+            System.out.println(parseInt(height_id.getText()));
+            resultimc.setText(IMCtest(parseInt(weight_id.getText()), parseInt(height_id.getText())));
         });
 
-        globalICM.getChildren().removeAll(IMC);
+        global_moncul.getChildren().removeAll(globalICM);
         globalTableau.getChildren().removeAll(tableView, Hbtn);
         globalAlgo.getChildren().removeAll(Algo);
-        gloSts.getChildren().removeAll(globalStats);
         btnHome.setOnMouseClicked(action -> {
             globalTableau.getChildren().addAll(tableView, Hbtn);
             globalAlgo.getChildren().removeAll(Algo);
-            globalICM.getChildren().removeAll(IMC);
+
         });
         btnAlgo.setOnMouseClicked(action -> {
             globalAlgo.getChildren().addAll(Algo);
             globalTableau.getChildren().removeAll(tableView, Hbtn);
-            globalICM.getChildren().removeAll(IMC);
+            global_moncul.getChildren().removeAll(globalICM);
         });
         btnimc.setOnMouseClicked(btnaction -> {
-            globalICM.getChildren().addAll(IMC);
+            global_moncul.getChildren().addAll(globalICM);
             globalTableau.getChildren().removeAll(tableView, Hbtn);
             globalAlgo.getChildren().removeAll(Algo);
         });
+
+        btnValidate.setOnMouseClicked(btnaction ->{
+            String Title = this.Title.getText();
+            String Author = this.Author.getText();
+            String Resume = this.Resume.getText();
+            String chaine1 = this.Column.getText();
+            Integer Column = Integer.parseInt(chaine1);
+            String chaine2 = this.Row.getText();
+            Integer Row = Integer.parseInt(chaine2);
+            String chaine3 = this.Publication.getText();
+            Integer Publication = Integer.parseInt(chaine3);
+            ObservableList<Book> book = FXCollections.observableArrayList();
+
+            //for(int i = 0; i <book.size(); i++){
+            //if(book.get(i) == null){
+            book.add(new Book(Title, Author, Resume, Column, Row, Publication));
+            //  break;
+            //}
+            // }
+
+            this.tableView.setItems(book);
+        });
+
         btnexit.setOnMouseClicked(btnaction -> {
             System.exit(0);
         });
