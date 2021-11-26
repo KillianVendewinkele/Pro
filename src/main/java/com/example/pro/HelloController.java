@@ -54,6 +54,12 @@ public class HelloController implements Initializable {
     private Button btnHome;
 
     @FXML
+    private Button btnimc;
+
+    @FXML
+    private Button IMCsend;
+
+    @FXML
     private VBox globalStats;
 
     @FXML
@@ -69,10 +75,16 @@ public class HelloController implements Initializable {
     private AnchorPane gloSts;
 
     @FXML
+    private AnchorPane IMC;
+
+    @FXML
     private AnchorPane Algo;
 
     @FXML
     private VBox globalAlgo;
+
+    @FXML
+    private VBox globalICM;
 
     @FXML
     private TextField binary;
@@ -81,11 +93,19 @@ public class HelloController implements Initializable {
     private TextField hexa;
 
     @FXML
+    private TextField weight;
+
+    @FXML
+    private TextField height;
+
+    @FXML
     private TextField deci;
 
     @FXML
     private TextField roman;
 
+    @FXML
+    private Label resultimc;
 
     public static String binaryNum(int n){
         String our_number_in_binary_str = "";
@@ -188,6 +208,65 @@ public class HelloController implements Initializable {
         }
     }
 
+    /*
+                less than 18,5    You are underweight
+                18,5 to 25    You have a normal weight
+                25 to 30            You are overweight
+                30 to 35            You are moderately obese
+                35 to 40            You are obese
+                more than 40    You are morbidly or massively obese              */
+
+    public static String IMCtest(int weight, int height){
+        String imc_message = "";
+        boolean verification_weight = true;
+        boolean verification_height = true;
+        float imc = (weight / (height*height));
+
+        if (weight < 0){
+            verification_weight = false;
+        }
+        if (height < 0){
+            verification_height = false;
+        }
+        if (verification_height){
+            if (verification_weight){
+                if (imc < 18.5) {
+                    imc_message = "Your imc is : " + String.valueOf(imc) + ". You are underweight ";
+                }
+                else{
+                    if (imc < 25){
+                        imc_message = "Your imc is : " + String.valueOf(imc) + ". You have a normal weight";
+                    }
+                    else{
+                        if (imc < 30){
+                            imc_message = "Your imc is : " + String.valueOf(imc) + ". You are overweight";
+                        }
+                        else{
+                            if (imc < 35){
+                                imc_message = "Your imc is : " + String.valueOf(imc) + ". You are moderately obese";
+                            }
+                            else{
+                                if (imc < 40){
+                                    imc_message = "Your imc is : " + String.valueOf(imc) + ". You are obese";
+                                }
+                                else {
+                                    imc_message = "Your imc is : " + String.valueOf(imc) + ". You are morbidly or massively obese";
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else{
+                imc_message = "ERROR, wrong weight";
+            }
+        }
+        else{
+            imc_message = "ERROR, wrong height";
+        }
+        return  imc_message;
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
 
@@ -223,7 +302,7 @@ public class HelloController implements Initializable {
                 deci.setText(String.valueOf(getDecimal(num)));
             }
             catch (Exception ERROR){
-                System.out.println("ERROR");
+                System.out.println("ERROR - it's not a hexadecimal number");
             }
         });
         binary.setOnAction(action -> {
@@ -231,20 +310,36 @@ public class HelloController implements Initializable {
                 deci.setText(ReversedbinaryNum(parseInt(binary.getText())));
             }
             catch (Exception ERROR){
-                System.out.println("ERROR");
+                System.out.println("ERROR - Your binary is trash");
+            }
+        });
+        IMCsend.setOnAction(action -> {
+            try{
+                resultimc.setText(IMCtest(parseInt(weight.getText()), parseInt(height.getText())));
+            }
+            catch(Exception ERROR) {
+                System.out.println("ERROR - Are you too much big?");
             }
         });
 
+        globalICM.getChildren().removeAll(IMC);
         globalTableau.getChildren().removeAll(tableView, Hbtn);
         globalAlgo.getChildren().removeAll(Algo);
         gloSts.getChildren().removeAll(globalStats);
         btnHome.setOnMouseClicked(action -> {
             globalTableau.getChildren().addAll(tableView, Hbtn);
             globalAlgo.getChildren().removeAll(Algo);
+            globalICM.getChildren().removeAll(IMC);
         });
         btnAlgo.setOnMouseClicked(action -> {
             globalAlgo.getChildren().addAll(Algo);
             globalTableau.getChildren().removeAll(tableView, Hbtn);
+            globalICM.getChildren().removeAll(IMC);
+        });
+        btnimc.setOnMouseClicked(btnaction -> {
+            globalICM.getChildren().addAll(IMC);
+            globalTableau.getChildren().removeAll(tableView, Hbtn);
+            globalAlgo.getChildren().removeAll(Algo);
         });
         btnexit.setOnMouseClicked(btnaction -> {
             System.exit(0);
