@@ -217,19 +217,23 @@ public class HelloController implements Initializable {
                 more than 40    You are morbidly or massively obese              */
 
     public static String IMCtest(int weight, int height){
+        System.out.println("start");
         String imc_message = "";
         boolean verification_weight = true;
         boolean verification_height = true;
-        float imc = (weight / (height*height));
-
+        float imc = (float) (weight / Math.pow(height, height));
+        System.out.println("init done");
         if (weight < 0){
             verification_weight = false;
         }
         if (height < 0){
             verification_height = false;
         }
+        System.out.println("verif init done");
+
         if (verification_height){
             if (verification_weight){
+                System.out.println("starting and searching your imc");
                 if (imc < 18.5) {
                     imc_message = "Your imc is : " + String.valueOf(imc) + ". You are underweight ";
                 }
@@ -259,11 +263,14 @@ public class HelloController implements Initializable {
             }
             else{
                 imc_message = "ERROR, wrong weight";
+                System.out.println("wrong height");
             }
         }
         else{
             imc_message = "ERROR, wrong height";
+            System.out.println("wrong weight");
         }
+        System.out.println("all has been done");
         return  imc_message;
     }
 
@@ -315,7 +322,10 @@ public class HelloController implements Initializable {
         });
         IMCsend.setOnAction(action -> {
             try{
-                resultimc.setText(IMCtest(parseInt(weight.getText()), parseInt(height.getText())));
+                int tempo_height = parseInt(height.getText());
+                int tempo_weight = parseInt(weight.getText());
+
+                resultimc.setText(IMCtest(tempo_weight, tempo_height));
             }
             catch(Exception ERROR) {
                 System.out.println("ERROR - Are you too much big?");
